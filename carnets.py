@@ -46,10 +46,16 @@ class MainWindow(QtGui.QMainWindow):
 		#self.ui.llistaAlumnes.setColumnWidth(1,150)
 		
 		self.llista = []
+		self.scene = QtGui.QGraphicsScene()
+		self.ui.graphicsView.setScene(self.scene)
 
 	def showAlumne(self,a,b):
-		print self.ui.llistaAlumnes.item(a,1).text()
-		q = QtCore.QPixmap()
+		fn = self.ui.llistaAlumnes.item(a,1).text()
+		q = QtGui.QPixmap()
+		fot = self.directory + "/" + fn
+		q.load(fot)
+		self.scene.clear()
+		self.scene.addPixmap(q)
 
 	def clearItems(self):
 		while self.ui.llistaAlumnes.item(0,0):
