@@ -49,6 +49,7 @@ class MainWindow(QtGui.QMainWindow):
 
 	def showAlumne(self,a,b):
 		print self.ui.llistaAlumnes.item(a,1).text()
+		q = QtCore.QPixmap()
 
 	def clearItems(self):
 		while self.ui.llistaAlumnes.item(0,0):
