@@ -37,17 +37,31 @@ class MainWindow(QtGui.QMainWindow):
 		self.setWindowTitle("Carnets")
 		self.connect(self.ui.actionCarrega,
 			QtCore.SIGNAL("triggered()"), self.loadFile)
+		self.connect(self.ui.actionDesa,
+			QtCore.SIGNAL("triggered()"), self.saveToFile)
 		self.connect(self.ui.llistaAlumnes,
 			QtCore.SIGNAL("cellClicked(int,int)"), self.showAlumne)
+		self.connect(self.ui.botFoto,
+			QtCore.SIGNAL("clicked()"), self.canviarFoto)
 		
 		self.center()
 		
-		self.ui.llistaAlumnes.setColumnWidth(0,350)
+		self.ui.llistaAlumnes.setColumnWidth(0,250)
 		#self.ui.llistaAlumnes.setColumnWidth(1,150)
 		
 		self.llista = []
 		self.scene = QtGui.QGraphicsScene()
 		self.ui.graphicsView.setScene(self.scene)
+		self.selected = -1
+
+	def canviarFoto(self):
+		fn = QtGui.QFileDialog.getOpenFileName(self, "Load File",self.directory)
+		m = re.search('(.*)/(.*)',str(fn))
+		dr = m.group(1)
+		ff = m.group(2)
+		if dr != self.directory: raise "EEI"
+		self.ui.llistaAlumnes.item(self.selected,1).setText(ff)
+		self.showAlumne(self.selected,0)
 
 	def showAlumne(self,a,b):
 		fn = self.ui.llistaAlumnes.item(a,1).text()
@@ -56,6 +70,8 @@ class MainWindow(QtGui.QMainWindow):
 		q.load(fot)
 		self.scene.clear()
 		self.scene.addPixmap(q)
+		self.selected = a
+		self.ui.graphicsView.show()
 
 	def clearItems(self):
 		while self.ui.llistaAlumnes.item(0,0):
@@ -84,6 +100,10 @@ class MainWindow(QtGui.QMainWindow):
 			al = AlItem(m[0][0],m[0][1])
 			al.insert(self.ui.llistaAlumnes)
 		f.close()
+	
+	def saveToFile(self):
+		for i in self.ui.llistaAlumnes:
+			print i
 
 
 

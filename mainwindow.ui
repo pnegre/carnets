@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>420</width>
-    <height>442</height>
+    <width>453</width>
+    <height>464</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -14,7 +14,7 @@
   </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QGridLayout" name="gridLayout" >
-    <item rowspan="2" row="0" column="0" >
+    <item rowspan="3" row="0" column="0" >
      <widget class="QTableWidget" name="llistaAlumnes" >
       <property name="sizePolicy" >
        <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
@@ -36,21 +36,22 @@
     </item>
     <item row="0" column="1" >
      <widget class="QGraphicsView" name="graphicsView" >
-      <property name="minimumSize" >
-       <size>
-        <width>226</width>
-        <height>0</height>
-       </size>
-      </property>
       <property name="maximumSize" >
        <size>
-        <width>317</width>
-        <height>16777215</height>
+        <width>121</width>
+        <height>151</height>
        </size>
       </property>
      </widget>
     </item>
     <item row="1" column="1" >
+     <widget class="QPushButton" name="botFoto" >
+      <property name="text" >
+       <string>Canvia Foto</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" >
      <spacer name="verticalSpacer" >
       <property name="orientation" >
        <enum>Qt::Vertical</enum>
@@ -64,15 +65,13 @@
      </spacer>
     </item>
    </layout>
-   <zorder>llistaAlumnes</zorder>
-   <zorder>graphicsView</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar" >
    <property name="geometry" >
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>420</width>
+     <width>453</width>
      <height>27</height>
     </rect>
    </property>
