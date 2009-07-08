@@ -27,11 +27,6 @@
         <string>Nom</string>
        </property>
       </column>
-      <column>
-       <property name="text" >
-        <string>Foto</string>
-       </property>
-      </column>
      </widget>
     </item>
     <item row="0" column="1" >
@@ -72,7 +67,7 @@
      <x>0</x>
      <y>0</y>
      <width>453</width>
-     <height>27</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFitxer" >
@@ -80,7 +75,6 @@
      <string>Fitxer</string>
     </property>
     <addaction name="actionCarrega" />
-    <addaction name="actionDesa" />
     <addaction name="separator" />
     <addaction name="actionSurt" />
    </widget>
