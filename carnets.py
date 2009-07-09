@@ -169,7 +169,7 @@ class MainWindow(QtGui.QMainWindow):
 		except:
 			zipf = zipfile.ZipFile(self.zip_file,"w")
 			# Hem d'escriure una entrada almanco dins el zip
-			zipf.writestr("indx","aa")
+			zipf.writestr("dummy","dummy")
 		zipf.close()
 		
 		self.clearItems()
@@ -189,13 +189,14 @@ class MainWindow(QtGui.QMainWindow):
 	
 	
 	def doCarnets(self):
-		cp = CarnetPage()
-		cp.loadTemplate()
+		nalumnes = self.ui.llistaAlumnes.rowCount()
+		if nalumnes == 0: return
 		
 		tempDir = tempfile.mkdtemp()
 		
+		cp = CarnetPage()
+		cp.loadTemplate()
 		zipf = zipfile.ZipFile(self.zip_file,"r")
-		
 		nalumnes = self.ui.llistaAlumnes.rowCount()
 		for i in range(0,nalumnes):
 			al = self.ui.llistaAlumnes.item(i,0).alObject
@@ -214,7 +215,6 @@ class MainWindow(QtGui.QMainWindow):
 			cp.newData(al.alumne, fotoFile)
 		
 		cp.cleanup()
-		
 		zipf.close()
 
 
