@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import sys, os, re, time, zipfile, HTMLParser, itertools
+import sys, os, re, time, zipfile, HTMLParser, itertools, tempfile
 from PyQt4 import QtCore, QtGui, uic
 from carnetPage import *
 
@@ -173,6 +173,8 @@ class MainWindow(QtGui.QMainWindow):
 		cp = CarnetPage()
 		cp.loadTemplate()
 		
+		tempDir = tempfile.mkdtemp()
+		
 		zipf = zipfile.ZipFile(self.zip_file,"r")
 		
 		nalumnes = self.ui.llistaAlumnes.rowCount()
@@ -180,15 +182,17 @@ class MainWindow(QtGui.QMainWindow):
 			al = self.ui.llistaAlumnes.item(i,0).alObject
 			print al.alumne
 			
+			fotoFile = tempDir + "/" + al.foto
+			
 			try:
 				data = zipf.read(al.foto)
-				f = open("/tmp/foto.jpg","w")
+				f = open(fotoFile,"w")
 				f.write(data)
 				f.close()
 			except:
 				print al.alumne, "No te foto"			
 			
-			cp.newData(al.alumne, "/tmp/foto.jpg")
+			cp.newData(al.alumne, fotoFile)
 		
 		cp.cleanup()
 		
