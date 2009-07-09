@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys, os, re, time, zipfile, HTMLParser, itertools, tempfile
+import Image # PIL
 from PyQt4 import QtCore, QtGui, uic
 from carnetPage import *
 
@@ -62,6 +63,20 @@ class Parser(HTMLParser.HTMLParser):
 		f.close()
 
 
+import StringIO
+
+def processPhoto(fn):
+	print fn
+	im = Image.open(fn)
+	if im.size[0] > 300:
+		print "Massa grossa!"
+		wpercent = (130/float(im.size[0]))
+		hsize = int((float(im.size[1])*float(wpercent)))
+		im = im.resize((130,hsize))
+	
+	buf = StringIO.StringIO()
+	im.save(buf, format= 'JPEG')
+	return buf.getvalue()
 
 
 
@@ -103,10 +118,12 @@ class MainWindow(QtGui.QMainWindow):
 		fn = QtGui.QFileDialog.getOpenFileName(self, "Load File")
 		if fn == '': return
 		
+		data = processPhoto(str(fn))
+		
 		localFN = self.ui.llistaAlumnes.item(self.selected,0).alObject.foto
 		
 		zipf = zipfile.ZipFile(self.zip_file,"a")
-		zipf.write(str(fn), str(localFN))
+		zipf.writestr(str(localFN),data)
 		zipf.close()
 
 		self.showAlumne(self.selected,0)
