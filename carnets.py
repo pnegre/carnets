@@ -3,6 +3,7 @@
 
 import sys, os, re, time, zipfile, HTMLParser, itertools
 from PyQt4 import QtCore, QtGui, uic
+from carnetPage import *
 
 
 class AlWgt(QtGui.QTableWidgetItem):

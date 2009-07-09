@@ -51,12 +51,12 @@ class CarnetPage(object):
 
 
 
-cp = CarnetPage()
-cp.loadTemplate()
-f = open("data/data.txt")
-for l in f:
-	d = re.findall('^(.*?)\s\s+(.*)$',l)
-	cp.newData(d[0][0],d[0][1])
-	print ".",
-f.close()
-cp.cleanup()
+#cp = CarnetPage()
+#cp.loadTemplate()
+#f = open("data/data.txt")
+#for l in f:
+	#d = re.findall('^(.*?)\s\s+(.*)$',l)
+	#cp.newData(d[0][0],d[0][1])
+	#print ".",
+#f.close()
+#cp.cleanup()
