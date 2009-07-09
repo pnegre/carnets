@@ -173,7 +173,7 @@ class MainWindow(QtGui.QMainWindow):
 		cp = CarnetPage()
 		cp.loadTemplate()
 		
-		nalumnes = 10 # quants?
+		nalumnes = self.ui.llistaAlumnes.rowCount()
 		for i in range(0,nalumnes):
 			al = self.ui.llistaAlumnes.item(i,0).alObject
 			print al.alumne
