@@ -180,7 +180,6 @@ class MainWindow(QtGui.QMainWindow):
 		nalumnes = self.ui.llistaAlumnes.rowCount()
 		for i in range(0,nalumnes):
 			al = self.ui.llistaAlumnes.item(i,0).alObject
-			print al.alumne
 			
 			fotoFile = tempDir + "/" + al.foto
 			
@@ -190,6 +189,7 @@ class MainWindow(QtGui.QMainWindow):
 				f.write(data)
 				f.close()
 			except:
+				os.system("cp nobody.jpg " + fotoFile)
 				print al.alumne, "No te foto"			
 			
 			cp.newData(al.alumne, fotoFile)
