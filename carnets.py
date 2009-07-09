@@ -75,6 +75,8 @@ class MainWindow(QtGui.QMainWindow):
 		self.setWindowTitle("Carnets")
 		self.connect(self.ui.actionCarrega,
 			QtCore.SIGNAL("triggered()"), self.loadFile)
+		self.connect(self.ui.actionFes_carnets,
+			QtCore.SIGNAL("triggered()"), self.doCarnets)
 		self.connect(self.ui.actionSurt,
 			QtCore.SIGNAL("triggered()"),self.doExit)	
 	
@@ -164,6 +166,10 @@ class MainWindow(QtGui.QMainWindow):
 			filename = re.findall('.*\((\d+)\)$', data)[0] + ".jpg"
 			al = AlItem(data, filename)
 			al.insert(self.ui.llistaAlumnes)
+	
+	
+	def doCarnets(self):
+		print "EI"
 
 
 

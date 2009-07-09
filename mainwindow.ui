@@ -75,6 +75,7 @@
      <string>Fitxer</string>
     </property>
     <addaction name="actionCarrega" />
+    <addaction name="actionFes_carnets" />
     <addaction name="separator" />
     <addaction name="actionSurt" />
    </widget>
@@ -94,6 +95,11 @@
   <action name="actionSurt" >
    <property name="text" >
     <string>Surt</string>
+   </property>
+  </action>
+  <action name="actionFes_carnets" >
+   <property name="text" >
+    <string>Fes carnets</string>
    </property>
   </action>
  </widget>
