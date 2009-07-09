@@ -66,7 +66,6 @@ class Parser(HTMLParser.HTMLParser):
 
 
 def processPhoto(fn):
-	print fn
 	im = Image.open(fn)
 	if im.size[0] > 300:
 		print "Massa grossa!"
@@ -79,6 +78,11 @@ def processPhoto(fn):
 	return buf.getvalue()
 
 
+
+class PBarDlg(QtGui.QDialog):
+	def __init__(self, parent=None):
+		QtGui.QWidget.__init__(self,parent)
+		self.ui = uic.loadUi("pbar.ui",self)
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -197,6 +201,9 @@ class MainWindow(QtGui.QMainWindow):
                 QtGui.QMessageBox.Ok)
 			return
 		
+		pBar = PBarDlg(self)
+		pBar.show()
+		
 		tempDir = tempfile.mkdtemp()
 		
 		cp = CarnetPage()
@@ -218,9 +225,12 @@ class MainWindow(QtGui.QMainWindow):
 				print al.alumne, "No te foto"			
 			
 			cp.newData(al.alumne, fotoFile)
+			QtGui.QApplication.processEvents()
 		
 		cp.cleanup()
 		zipf.close()
+		
+		pBar.close()
 
 
 
