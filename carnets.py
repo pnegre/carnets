@@ -225,6 +225,7 @@ class MainWindow(QtGui.QMainWindow):
 				print al.alumne, "No te foto"			
 			
 			cp.newData(al.alumne, fotoFile)
+			pBar.ui.progressBar.setValue(int(100.0*i/nalumnes))
 			QtGui.QApplication.processEvents()
 		
 		cp.cleanup()

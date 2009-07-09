@@ -28,7 +28,7 @@
    <item row="0" column="0" >
     <widget class="QProgressBar" name="progressBar" >
      <property name="maximum" >
-      <number>0</number>
+      <number>100</number>
      </property>
      <property name="value" >
       <number>-1</number>
