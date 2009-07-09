@@ -162,8 +162,7 @@ class MainWindow(QtGui.QMainWindow):
 	def loadFile(self):
 		fn = QtGui.QFileDialog.getOpenFileName(self, "Load File")
 		if fn == ' ': return
-		m = re.search('(.*)/(.*)',str(fn))
-		directory = m.group(1)
+		directory = os.path.dirname(str(fn))
 		self.zip_file = directory + "/fotos.zip"
 		try:
 			zipf = zipfile.ZipFile(self.zip_file,"r")
