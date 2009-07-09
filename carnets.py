@@ -106,7 +106,6 @@ class MainWindow(QtGui.QMainWindow):
 		localFN = self.ui.llistaAlumnes.item(self.selected,0).alObject.foto
 		
 		zipf = zipfile.ZipFile(self.zip_file,"a")
-		# Funcionarà si hi ha accents, etc???
 		zipf.write(str(fn), str(localFN))
 		zipf.close()
 
@@ -158,10 +157,8 @@ class MainWindow(QtGui.QMainWindow):
 		
 		self.clearItems()
 		
-		f = open(fn)
 		p = Parser()
-		p.feed(''.join(f.readlines()))
-		f.close()
+		p.fileFeed(fn)
 		
 		for data in p.Data:
 			filename = re.findall('.*\((\d+)\)$', data)[0] + ".jpg"
