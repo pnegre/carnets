@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import sys, os, re, time, zipfile, HTMLParser, itertools, tempfile
-import StringIO
-import Image # PIL
+import StringIO, Image
+import shutil
 from PyQt4 import QtCore, QtGui, uic
 from carnetPage import *
 
@@ -225,11 +225,14 @@ class MainWindow(QtGui.QMainWindow):
 				print al.alumne, "No te foto"			
 			
 			cp.newData(al.alumne, fotoFile)
-			pBar.ui.progressBar.setValue(int(100.0*i/nalumnes))
+			pBar.ui.progressBar.setValue(int(100.0*i/(nalumnes-1)))
 			QtGui.QApplication.processEvents()
 		
 		cp.cleanup()
 		zipf.close()
+		
+		print tempDir
+		shutil.rmtree(tempDir)
 		
 		pBar.close()
 
