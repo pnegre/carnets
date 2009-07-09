@@ -170,7 +170,18 @@ class MainWindow(QtGui.QMainWindow):
 	
 	
 	def doCarnets(self):
-		print "EI"
+		cp = CarnetPage()
+		cp.loadTemplate()
+		
+		nalumnes = 10 # quants?
+		for i in range(0,nalumnes):
+			al = self.ui.llistaAlumnes.item(i,0).alObject
+			print al.alumne
+			cp.newData(al.alumne, "foto")
+		
+		cp.cleanup()
+		
+		print dir(self.ui.llistaAlumnes)
 
 
 
