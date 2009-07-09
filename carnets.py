@@ -24,7 +24,6 @@ class AlItem(object):
 	def insert(self,t):
 		t.insertRow(0)
 		t.setItem(0, 0, AlWgt(self,QtCore.QString.fromUtf8(self.alumne)))
-		#t.setItem(0, 1, AlWgt(self,QtCore.QString.fromUtf8(self.foto)))
 
 
 
@@ -114,7 +113,10 @@ class MainWindow(QtGui.QMainWindow):
 		self.close()
 
 	def canviarFoto(self):
-		if self.selected == -1: return
+		if self.selected == -1:
+			QtGui.QMessageBox.critical(self, "Alerta!", "Tria un alumne",
+                QtGui.QMessageBox.Ok)
+			return
 		
 		fn = QtGui.QFileDialog.getOpenFileName(self, "Load File")
 		if fn == '': return
@@ -190,7 +192,10 @@ class MainWindow(QtGui.QMainWindow):
 	
 	def doCarnets(self):
 		nalumnes = self.ui.llistaAlumnes.rowCount()
-		if nalumnes == 0: return
+		if nalumnes == 0:
+			QtGui.QMessageBox.critical(self, "Alerta!", "No hi ha alumnes",
+                QtGui.QMessageBox.Ok)
+			return
 		
 		tempDir = tempfile.mkdtemp()
 		
