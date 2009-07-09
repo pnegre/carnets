@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys, os, re, time, zipfile, HTMLParser, itertools, tempfile
+import StringIO
 import Image # PIL
 from PyQt4 import QtCore, QtGui, uic
 from carnetPage import *
@@ -63,7 +64,7 @@ class Parser(HTMLParser.HTMLParser):
 		f.close()
 
 
-import StringIO
+
 
 def processPhoto(fn):
 	print fn
@@ -178,8 +179,13 @@ class MainWindow(QtGui.QMainWindow):
 		p.fileFeed(fn)
 		
 		for data in p.Data:
-			filename = re.findall('.*\((\d+)\)$', data)[0] + ".jpg"
-			al = AlItem(data, filename)
+			m = re.findall('.*-(.*)\((\d+)\)$', data)
+			alName = m[0][0]
+			exp = m[0][1]
+			
+			filename = exp + ".jpg"
+			
+			al = AlItem(alName, filename)
 			al.insert(self.ui.llistaAlumnes)
 	
 	
