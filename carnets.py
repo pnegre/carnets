@@ -173,15 +173,26 @@ class MainWindow(QtGui.QMainWindow):
 		cp = CarnetPage()
 		cp.loadTemplate()
 		
+		zipf = zipfile.ZipFile(self.zip_file,"r")
+		
 		nalumnes = self.ui.llistaAlumnes.rowCount()
 		for i in range(0,nalumnes):
 			al = self.ui.llistaAlumnes.item(i,0).alObject
 			print al.alumne
-			cp.newData(al.alumne, "foto")
+			
+			try:
+				data = zipf.read(al.foto)
+				f = open("/tmp/foto.jpg","w")
+				f.write(data)
+				f.close()
+			except:
+				print al.alumne, "No te foto"			
+			
+			cp.newData(al.alumne, "/tmp/foto.jpg")
 		
 		cp.cleanup()
 		
-		print dir(self.ui.llistaAlumnes)
+		zipf.close()
 
 
 

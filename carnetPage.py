@@ -31,7 +31,7 @@ class CarnetPage(object):
 		graphic = self.model.createInstance( "com.sun.star.text.TextGraphicObject" ) 
 		t.insertTextContent(cursor, graphic, False )
 		dr = os.getcwd()
-		graphic.GraphicURL = "file://" + dr + "/data/" + ft
+		graphic.GraphicURL = "file://" + ft
 		h = graphic.Height
 		fact = float(f.Width)/float(graphic.Width)
 		graphic.Width = f.Width
