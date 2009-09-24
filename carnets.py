@@ -33,27 +33,41 @@ class Parser(HTMLParser.HTMLParser):
 		HTMLParser.HTMLParser.__init__(self)
 		self.Data = []
 		self.intag = 0
+		self.times = 0
+		self.al = {}
+		self.partialData = ''
 		
 	def handle_starttag(self, tag, attrs):
 		if tag == 'td' and attrs[0][1] == 'td_PrincipalAlu':
 			self.intag = 1
+			self.times += 1
+			self.partialData = ''
 	
 	def handle_endtag(self,tag):
 		if tag == 'td':
-			if self.intag == 2:
-				d = self.Data[-1].split()
-				self.Data[-1] = ' '.join(d)
-				
+			self.partialData = self.partialData.rstrip(' ')
+
+			if self.times == 1:
+				self.al['Num'] = self.partialData
+			if self.times == 2:
+				self.al['Nom'] = self.partialData
+			if self.times == 3:
+				self.al['Exp'] = self.partialData
+				self.Data.append(self.al)
+				self.times = 0
+				self.al = {}
+
 			self.intag = 0
 	
 	def handle_data(self,data):
 		if self.intag:
 			data = data.replace('\t','').replace('\n','')
-			if self.intag == 1:
-				self.Data.append(data)
-				self.intag = 2
-			elif self.intag == 2:
-				self.Data[-1] += data
+			self.partialData += data
+			#if self.intag == 1:
+				#self.Data.append(data)
+				#self.intag = 2
+			#elif self.intag == 2:
+				#self.Data[-1] += data
 		
 			
 	
@@ -61,6 +75,7 @@ class Parser(HTMLParser.HTMLParser):
 		f = open(f)
 		self.feed(''.join(f.readlines()))
 		f.close()
+		print self.Data
 
 
 
@@ -184,9 +199,12 @@ class MainWindow(QtGui.QMainWindow):
 		p.fileFeed(fn)
 		
 		for data in p.Data:
-			m = re.findall('.*-(.*)\((\d+)\)$', data)
-			alName = m[0][0]
-			exp = m[0][1]
+			#m = re.findall('.*-(.*)\((\d+)\)$', data)
+			#alName = m[0][0]
+			#exp = m[0][1]
+
+			alName = data['Nom']
+			exp = data['Exp']
 			
 			filename = exp + ".jpg"
 			
