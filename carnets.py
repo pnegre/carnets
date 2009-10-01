@@ -250,7 +250,7 @@ class MainWindow(QtGui.QMainWindow):
 		zipf.close()
 		
 		print tempDir
-		shutil.rmtree(tempDir)
+		#shutil.rmtree(tempDir)
 		
 		pBar.close()
 
